@@ -1,0 +1,57 @@
+<template>
+
+    <lightning-card title="Registre su informaciòn" icon-name="standard:record">
+        
+        <lightning-record-edit-form object-api-name={leadObject}>
+            
+            <!-- <lightning-messages> -->
+                <template if:true={showSuccessMessage}>
+                    <h2>Informaciòn registrada correctamente</h2>
+                </template>
+                <template if:true={showDuplicates}>
+                    <h2>Se encontraron duplicados</h2>
+                    <lightning-datatable key-field="Id" data={arrayDuplicates} columns={columns}></lightning-datatable>
+                </template>
+            <!-- </lightning-messages> -->
+            
+            <div class="slds-grid slds-wrap">
+
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-input-field field-name="FirstName" name="FirstName" onchange={genericOnChange} ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-input-field field-name="Company" name="Company"  onchange={genericOnChange} ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-input-field field-name="LastName" name="LastName" onchange={genericOnChange} ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-input-field field-name="Title" name="Title" onchange={genericOnChange} ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-input-field field-name="LeadSource" name="LeadSource" onchange={genericOnChange} ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-input-field field-name="Address" name="Address" onchange={genericOnChange} ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-input-field field-name="Phone" name="Phone" onchange={genericOnChange} ></lightning-input-field> 
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-input-field field-name="Email" name="Email" onchange={genericOnChange} ></lightning-input-field> 
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                    <lightning-input-field field-name="MobilePhone" name="MobilePhone" onchange={genericOnChange} ></lightning-input-field>
+                </div>
+            
+                <div class="slds-col slds-size_12-of-12 centered">
+                    <lightning-button class="slds-m-top_small" type="button" variant="brand" label="Create new" onclick={registerInformation} ></lightning-button>
+                </div>
+
+            </div>
+        
+        </lightning-record-edit-form>
+
+    </lightning-card>
+
+</template>

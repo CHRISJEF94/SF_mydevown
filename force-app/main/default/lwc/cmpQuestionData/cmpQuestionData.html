@@ -1,0 +1,151 @@
+<template>
+    <lightning-card  title="Preguntas">
+
+        <template if:true={formFactor}>
+            <lightning-layout multiple-rows vertical-align="start">
+
+                <lightning-layout-item size="12" padding="around-small">
+                    
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered questionTable">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col" colspan=2>
+                                    <div class="slds-truncate" title="Nombre">Nombre</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Usa valores inversos?">Usa valores inversos?</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="">
+                                        <lightning-button variant="brand" 
+                                                          label="Add" 
+                                                          title="Agregar Pregunta" 
+                                                          class="slds-m-left_x-small"
+                                                          icon-name="utility:new"
+                                                          onclick={addOneMoreQuestion}>
+                                        </lightning-button>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={questions}>
+                                <template for:each={questions} for:item="question">
+                                    <tr key={question.id} class="slds-hint-parent" draggable="true">
+                                        <td data-label="Nombre" colspan=2>
+                                            <lightning-textarea variant="label-hidden" 
+                                                                type="text" 
+                                                                value={question.Descripcion__c} 
+                                                                data-name-id="Descripcion__c" 
+                                                                data-row-index={question.pos} 
+                                                                onblur={handleChangeDataInput} 
+                                                                required></lightning-textarea>
+                                        </td>
+                                        <td data-label="Valor">
+                                            <template if:true={question.Usa_valores_inversos__c}>
+                                                <lightning-input type="checkbox" 
+                                                                 variant="label-hidden" 
+                                                                 value={question.Usa_valores_inversos__c} 
+                                                                 data-name-id="Usa_valores_inversos__c" 
+                                                                 data-row-index={question.pos}  
+                                                                 onchange={handleChangeDataInput}
+                                                                 checked></lightning-input>
+                                            </template>
+                                            <template if:false={question.Usa_valores_inversos__c}>
+                                                <lightning-input type="checkbox" 
+                                                                 variant="label-hidden" 
+                                                                 value={question.Usa_valores_inversos__c} 
+                                                                 data-name-id="Usa_valores_inversos__c" 
+                                                                 data-row-index={question.pos}  
+                                                                 onchange={handleChangeDataInput}></lightning-input>
+                                            </template>
+                                        </td>
+                                        <td data-label="Eliminar fila">
+                                            <lightning-button variant="destructive" 
+                                                              label="X" 
+                                                              title="Eliminar" 
+                                                              class="slds-m-left_x-small"
+                                                              data-row-index={question.pos}
+                                                              onclick={handleDeleteQuestion}>
+                                            </lightning-button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+    
+                </lightning-layout-item>
+            
+            </lightning-layout>
+        </template>
+        
+        <template if:false={formFactor}>
+
+            <div class="slds-align_absolute-center">
+                <lightning-button   variant="brand" 
+                                    label="Add" 
+                                    title="Agregar Pregunta" 
+                                    class="slds-m-bottom_medium"
+                                    icon-name="utility:new"
+                                    onclick={addOneMoreQuestion}>
+                </lightning-button>
+            </div>
+
+            <div class="slds-scrollable_x">
+
+                <template if:true={questions}>
+
+                    <template for:each={questions} for:item="question">
+
+                        <lightning-card class="slds-m-around_small question_card" key={question.pos}  title={question.cardName}>
+                            <lightning-button variant="destructive" 
+                                                      label="X" 
+                                                      title="Eliminar" 
+                                                      class="slds-m-left_x-small"
+                                                      slot="actions"
+                                                      data-row-index={question.pos}
+                                                      onclick={handleDeleteQuestion}>
+                            </lightning-button>
+                            <p class="slds-p-horizontal_small">
+                                <lightning-textarea variant="label-hidden" 
+                                                    type="text" 
+                                                    placeholder="Descripción"
+                                                    value={question.Descripcion__c} 
+                                                    data-name-id="Descripcion__c" 
+                                                    data-row-index={question.pos} 
+                                                    onblur={handleChangeDataInput} 
+                                                    required>
+                                </lightning-textarea>
+                                <template if:true={question.Usa_valores_inversos__c}>
+                                    <lightning-input type="checkbox" 
+                                                     label="Usa valores inversos?"
+                                                     value={question.Usa_valores_inversos__c} 
+                                                     data-name-id="Usa_valores_inversos__c" 
+                                                     data-row-index={question.pos}  
+                                                     onchange={handleChangeDataInput}
+                                                     checked>
+                                    </lightning-input>
+                                </template>
+                                <template if:false={question.Usa_valores_inversos__c}>
+                                    <lightning-input type="checkbox" 
+                                                     label="Usa valores inversos?"
+                                                     value={question.Usa_valores_inversos__c} 
+                                                     data-name-id="Usa_valores_inversos__c" 
+                                                     data-row-index={question.pos}  
+                                                     onchange={handleChangeDataInput}>
+                                    </lightning-input>
+                                </template>
+                            </p>
+                        </lightning-card>
+
+                    </template>
+
+                </template>
+
+            </div>
+
+        </template>
+
+    </lightning-card>
+</template>

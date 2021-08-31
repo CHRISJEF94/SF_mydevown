@@ -1,0 +1,54 @@
+<template>
+    <lightning-card title="Preguntas">
+        
+        <lightning-layout multiple-rows vertical-align="start">
+
+            <template if:true={hasErrors}>
+                <lightning-layout-item size="12" padding="around-small">
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                        <h2>{errors}</h2>
+                    </div>
+                </lightning-layout-item>
+            </template>
+            
+            <lightning-layout-item size="12" padding="around-small">
+
+                <div class="slds-scrollable">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-scrollable_x" >
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Nombre">Nombre</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Usa valores inversos?">Usa valores inversos?</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <template if:true={questions}>
+                                <template for:each={questions} for:item="question">
+                                    <tr key={question.id} class="slds-hint-parent">
+                                        <td data-label="Nombre">
+                                            {question.Descripcion__c}
+                                        </td>
+                                        <td data-label="Usa valores inversos?">
+                                            <template if:true={question.Usa_valores_inversos__c}>
+                                                <lightning-input type="checkbox" variant="label-hidden" value={question.Usa_valores_inversos__c} checked disabled></lightning-input>
+                                            </template>
+                                            <template if:false={question.Usa_valores_inversos__c}>
+                                                <lightning-input type="checkbox" variant="label-hidden" value={question.Usa_valores_inversos__c} disabled></lightning-input>
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+            </lightning-layout-item>
+        
+        </lightning-layout>
+    </lightning-card>
+</template>

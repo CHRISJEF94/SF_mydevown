@@ -1,0 +1,35 @@
+tbody{
+    display:block;
+    width: 100%;
+    overflow: auto;
+    height: 15rem;
+}
+tr{
+    display: block;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+    width: 200px;
+}
+.opcionTable th:first-child,.opcionTable td:first-child{
+    width: 400px !important;
+}
+.opcionTable td:nth-child(2){
+    text-align: center;
+}
+.slds-checkbox{
+    width: 30px !important;
+    height: 30px !important;
+}
+.option_card{
+    min-width: 300px !important;
+    width: 300px !important;
+    border-radius: 5px !important;
+    -webkit-box-shadow: 3px 7px 15px -3px rgba(0,0,0,0.86) !important;
+    -moz-box-shadow: 3px 7px 15px -3px rgba(0,0,0,0.86) !important;
+    box-shadow: 3px 7px 15px -3px rgba(0,0,0,0.86) !important;
+}
+.slds-scrollable_x{
+    display: flex;
+}

@@ -1,0 +1,187 @@
+<template>
+    <lightning-card  title="Opciones">
+
+        <template if:true={formFactor}>
+
+            <lightning-layout multiple-rows vertical-align="start">
+
+                <lightning-layout-item size="12" padding="around-small">
+                    
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered opcionTable" >
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Nombre">Nombre</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Múltiples valores?">Múltiples valores?</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Valor">Valor</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Preguntas Relacionadas">Preguntas Relacionadas</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Orden por Pregunta">Orden por Pregunta</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="">
+                                        <lightning-button variant="brand" 
+                                                          label="Add" 
+                                                          title="Agregar Opción" 
+                                                          class="slds-m-left_x-small"
+                                                          icon-name="utility:new"
+                                                          onclick={addOneMoreOption}>
+                                        </lightning-button>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <template if:true={options}>
+                                <template for:each={options} for:item="option">
+                                    <tr key={option.pos} class="slds-hint-parent">
+                                        <td data-label="Nombre">
+                                            <lightning-input type="text" variant="label-hidden" value={option.Name} data-name-id="Name" data-row-index={option.pos} onblur={handleChangeDataInput} required></lightning-input>
+                                        </td>
+                                        <td data-label="Múltiples valores?">
+                                            <template if:true={option.Tiene_Multiples_Valores__c}>
+                                                <lightning-input type="checkbox" 
+                                                         variant="label-hidden" 
+                                                         value={option.Tiene_Multiples_Valores__c} 
+                                                         data-name-id="Tiene_Multiples_Valores__c" 
+                                                         data-row-index={option.pos}  
+                                                         onchange={handleChangeDataInput}
+                                                         checked></lightning-input>
+                                            </template>
+                                            <template if:false={option.Tiene_Multiples_Valores__c}>
+                                                <lightning-input type="checkbox" 
+                                                         variant="label-hidden" 
+                                                         value={option.Tiene_Multiples_Valores__c} 
+                                                         data-name-id="Tiene_Multiples_Valores__c" 
+                                                         data-row-index={option.pos}  
+                                                         onchange={handleChangeDataInput}></lightning-input>
+                                            </template>
+                                        </td>
+                                        <td data-label="Valor">
+                                            <lightning-input type="text" variant="label-hidden" value={option.Valor__c} data-name-id="Valor__c" data-row-index={option.pos} onblur={handleChangeDataInput} required></lightning-input>
+                                        </td>
+                                        <td data-label="Preguntas Relacionadas">
+                                            <lightning-input type="text" variant="label-hidden" value={option.Preguntas_Relacionadas__c} data-name-id="Preguntas_Relacionadas__c" data-row-index={option.pos} onblur={handleChangeDataInput}></lightning-input>
+                                        </td>
+                                        <td data-label="Orden por Pregunta">
+                                            <lightning-input type="text" variant="label-hidden" value={option.Orden_por_pregunta__c} data-name-id="Orden_por_pregunta__c" data-row-index={option.pos} onblur={handleChangeDataInput}></lightning-input>
+                                        </td>
+                                        <td data-label="Eliminar fila">
+                                            <lightning-button variant="destructive" 
+                                                              label="X" 
+                                                              title="Eliminar" 
+                                                              class="slds-m-left_x-small"
+                                                              data-row-index={option.pos}
+                                                              onclick={handleDeleteOption}>
+                                            </lightning-button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+    
+                </lightning-layout-item>
+            
+            </lightning-layout>
+
+        </template>
+
+        <template if:false={formFactor}>
+
+            <div class="slds-align_absolute-center">
+                <lightning-button   variant="brand" 
+                                    label="Add" 
+                                    title="Agregar Opción" 
+                                    class="slds-m-bottom_medium"
+                                    icon-name="utility:new"
+                                    onclick={addOneMoreOption}>
+                </lightning-button>
+            </div>
+
+            <div class="slds-scrollable_x">
+
+                <template if:true={options}>
+
+                    <template for:each={options} for:item="option">
+
+                        <lightning-card class="slds-m-around_small option_card" key={option.pos}  title={option.cardName}>
+                            <lightning-button variant="destructive" 
+                                                      label="X" 
+                                                      title="Eliminar" 
+                                                      class="slds-m-left_x-small"
+                                                      slot="actions"
+                                                      data-row-index={option.pos}
+                                                      onclick={handleDeleteOption}>
+                            </lightning-button>
+                            <p class="slds-p-horizontal_small">
+                                <lightning-input type="text" variant="label-hidden" placeholder="Nombre" value={option.Name} data-name-id="Name" data-row-index={option.pos} onblur={handleChangeDataInput} required></lightning-input>
+                                <template if:true={option.Tiene_Multiples_Valores__c}>
+                                    <lightning-input type="checkbox"
+                                                    class="slds-p-top_x-small"
+                                                    label="Tiene multiples valores?"
+                                                    value={option.Tiene_Multiples_Valores__c} 
+                                                    data-name-id="Tiene_Multiples_Valores__c" 
+                                                    data-row-index={option.pos}  
+                                                    onchange={handleChangeDataInput}
+                                                    checked>
+                                    </lightning-input>
+                                </template>
+                                <template if:false={option.Tiene_Multiples_Valores__c}>
+                                    <lightning-input type="checkbox"
+                                                    class="slds-p-top_x-small"
+                                                    label="Tiene multiples valores?"
+                                                    value={option.Tiene_Multiples_Valores__c} 
+                                                    data-name-id="Tiene_Multiples_Valores__c" 
+                                                    data-row-index={option.pos}  
+                                                    onchange={handleChangeDataInput}>
+                                    </lightning-input>
+                                </template>
+                                <lightning-input type="text" 
+                                                class="slds-p-top_x-small"
+                                                variant="label-hidden" 
+                                                placeholder="Valores" 
+                                                value={option.Valor__c} 
+                                                data-name-id="Valor__c" 
+                                                data-row-index={option.pos} 
+                                                onblur={handleChangeDataInput} 
+                                                required>
+                                </lightning-input>
+                                <lightning-input type="text" 
+                                                class="slds-p-top_x-small"
+                                                variant="label-hidden" 
+                                                placeholder="Preguntas Relacionadas" 
+                                                value={option.Preguntas_Relacionadas__c} 
+                                                data-name-id="Preguntas_Relacionadas__c" 
+                                                data-row-index={option.pos} 
+                                                onblur={handleChangeDataInput}>
+                                </lightning-input>
+                                <lightning-input type="text" 
+                                                class="slds-p-top_x-small"
+                                                variant="label-hidden" 
+                                                placeholder="Orden Por Pregunta" 
+                                                value={option.Orden_por_pregunta__c} 
+                                                data-name-id="Orden_por_pregunta__c" 
+                                                data-row-index={option.pos} 
+                                                onblur={handleChangeDataInput}>
+                                </lightning-input>
+                            </p>
+                        </lightning-card>
+
+                    </template>
+
+                </template>
+
+            </div>
+
+        </template>
+
+    </lightning-card>
+</template>

@@ -1,0 +1,74 @@
+<template>
+    <lightning-card title="Opciones">
+        
+        <lightning-layout multiple-rows vertical-align="start">
+
+            <template if:true={hasErrors}>
+                <lightning-layout-item size="12" padding="around-small">
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                        <h2>{errors}</h2>
+                    </div>
+                </lightning-layout-item>
+            </template>
+            
+            <lightning-layout-item size="12" padding="around-small">
+
+                <div class="slds-scrollable">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered" >
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Nombre">Nombre</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Múltiples valores?">Múltiples valores?</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Valor">Valor</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Preguntas Relacionadas">Preguntas Relacionadas</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Orden por Pregunta">Orden por Pregunta</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <template if:true={options}>
+                                <template for:each={options} for:item="option">
+                                    <tr key={option.id} class="slds-hint-parent">
+                                        <td data-label="Nombre">
+                                            {option.Name}
+                                        </td>
+                                        <template if:true={option.Tiene_Multiples_Valores__c}>
+                                            <td data-label="Múltiples valores?">
+                                                <lightning-input type="checkbox" variant="label-hidden" checked disabled></lightning-input>
+                                            </td>
+                                        </template>
+                                        <template if:false={option.Tiene_Multiples_Valores__c}>
+                                            <td data-label="Múltiples valores?">
+                                                <lightning-input type="checkbox" variant="label-hidden" disabled></lightning-input>
+                                            </td>
+                                        </template>
+                                        <td data-label="Valor">
+                                            {option.Valor__c}
+                                        </td>
+                                        <td data-label="Preguntas Relacionadas">
+                                            {option.Preguntas_Relacionadas__c}
+                                        </td>
+                                        <td data-label="Orden por Pregunta">
+                                            {option.Orden_por_pregunta__c}
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+            </lightning-layout-item>
+        
+        </lightning-layout>
+    </lightning-card>
+</template>

@@ -1,0 +1,54 @@
+<template>
+    <lightning-layout class="slds-grid slds-wrap" multiple-rows vertical-align="start">
+        <!-- <lightning-layout-item size="5" padding="around-small"> -->
+            <div class="slds-col slds-p-horizontal_small slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_5-of-12">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="namefield">Titulo</label>
+                    <lightning-input type="text" value={titulo} data-name-id="titulo" onblur={handleChangeDataInput} ></lightning-input>
+                </div>
+            </div>
+        <!-- </lightning-layout-item> -->
+        <!-- <lightning-layout-item size="5" padding="around-small"> -->
+            <div class="slds-col slds-p-horizontal_small slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_5-of-12">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="namefield">Autor</label>
+                    <lightning-input type="text" value={autor} data-name-id="autor" onblur={handleChangeDataInput} ></lightning-input>
+                </div>
+            </div>
+        <!-- </lightning-layout-item> -->
+        <!-- <lightning-layout-item size="2" padding="around-small"> -->
+            <div class="slds-col slds-p-horizontal_small slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_2-of-12">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="namefield">Tipo</label>
+                    <lightning-combobox
+                        class="all-tipo-test"
+                        name="tipo"
+                        label=""
+                        value={tipo}
+                        placeholder="Selecciona un valor"
+                        data-name-id="tipo"
+                        options={tipoValues}
+                        onchange={handleChangeDataInput}
+                        required>
+                    </lightning-combobox>
+                </div>
+            </div>
+        <!-- </lightning-layout-item> -->
+        <!-- <lightning-layout-item size="6" padding="around-small"> -->
+        <div class="slds-col slds-p-horizontal_small slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_6-of-12">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label">Descripción</label>
+                <lightning-input-rich-text value={descripcion} data-name-id="descripcion" onblur={handleChangeDataInput} ></lightning-input-rich-text>
+            </div>
+        </div>
+        <!-- </lightning-layout-item> -->
+        <!-- <lightning-layout-item size="6" padding="around-small"> -->
+        <div class="slds-col slds-p-horizontal_small slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_6-of-12">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label">Instrucciones</label>
+                <lightning-input-rich-text value={instrucciones} data-name-id="instrucciones" onblur={handleChangeDataInput} ></lightning-input-rich-text>
+            </div>
+        </div>
+        <!-- </lightning-layout-item> -->
+    </lightning-layout>
+</template>

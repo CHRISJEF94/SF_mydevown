@@ -1,0 +1,45 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+    </template>
+    <lightning-layout multiple-rows>
+        
+        <lightning-layout-item size="12" padding="around-small">
+            <!-- Call to General Information component -->
+            <lightning-card class="slds-grid" title="Información General">
+                <!-- slot="actions" -->
+                <div class="slds-col slds-p-around_x-small slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_5-of-12 right_align_buttons_gi">
+                    <lightning-button variant="success" class="slds-m-right_medium" label="Guardar"  onclick={handleProcessBasedOnEvent}></lightning-button>
+                    <lightning-button variant="brand" label="Ir al listado general" onclick={redirectToGeneralList} ></lightning-button>
+                </div>
+                
+                <c-cmp-general-information-data record-id-actual={recordIdActual}></c-cmp-general-information-data>
+            </lightning-card>
+
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12">
+            
+            <lightning-layout multiple-rows>
+
+                <lightning-layout-item size="12" padding="around-small">
+        
+                     <!-- Call to Option component -->
+                    <c-cmp-opcion-data record-id-actual={recordIdActual} ></c-cmp-opcion-data>
+        
+                </lightning-layout-item>
+        
+                <lightning-layout-item size="12" padding="around-small">
+        
+                    <!-- Call to Option component -->
+                    <c-cmp-question-data record-id-actual={recordIdActual} ></c-cmp-question-data>
+        
+                </lightning-layout-item>
+        
+            </lightning-layout>
+
+        </lightning-layout-item>
+
+    </lightning-layout>
+
+</template>

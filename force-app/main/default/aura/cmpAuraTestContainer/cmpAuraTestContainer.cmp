@@ -1,0 +1,5 @@
+<aura:component implements="flexipage:availableForAllPageTypes,lightning:actionOverride,force:hasRecordId">
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"></aura:handler>
+    <aura:attribute name="recordIdActual" type="String" access="public" />
+    <c:cmpTestData recordIdActual="{!v.recordIdActual}" />
+</aura:component>
