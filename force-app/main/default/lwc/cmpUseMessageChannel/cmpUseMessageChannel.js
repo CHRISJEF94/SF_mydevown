@@ -35,7 +35,7 @@ export default class CmpUseMessageChannel extends LightningElement {
 
     handleMessage(message) {
         console.log('message',message);
-        // this.recordId = message.recordId;
+        this.messageReceived = JSON.stringify(message);
     }
 
 }
